@@ -13,5 +13,5 @@ class staff(models.Model):
     email = models.EmailField()
     phone = models.IntegerField()
     address = models.TextField()
-    choice = [("manager","manager"),("staff","staff")]
-    position = models.Choices(choices=choice)
+    choice = (('manager','manager'),('staff','staff'))
+    position = models.CharField(max_length=7,choices=choice,default="staff")
