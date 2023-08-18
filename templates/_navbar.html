@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" style ="color:green"href="#"><img src="{% static 'images/logo.png' %}"></a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'home' %}">Menu</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'order' %}">Order</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'items' %}">Items</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'about' %}">About</a>
+      </li>
+
+    </ul>
+
+  </div>
+
+</nav>
+
+
+</body>
+</html>
