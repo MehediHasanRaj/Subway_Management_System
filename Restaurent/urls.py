@@ -22,6 +22,16 @@ urlpatterns = [
     path('about/',about, name = "about"),
     path('order/',order, name = "order"),
     path('menu/',menu, name = "menu"),
-    path('login/',login, name = "login"),
+    path('Signinorup/',signinup, name = "signin_or_up"),
     path('items/',items, name = "items"),
+    path('userform/',formView,name="userform"),
+    path('usersignin/',usersignin, name = "usersignin"),
+    path('stafflogin/',stafflogin,name='stafflogin'),
+    path('staffregistration/',staffregistration,name='staffregistration'),
+    path('userregistration/',userregistration,name = 'userregistration'),
+    path('signin',signin,name = 'signin'),
+    path('signup',signup, name = 'signup'),
+
+
+
 ]

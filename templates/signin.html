@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+<br>
+
+
+<div class="d-grid gap-2 col-2 mx-auto">
+  <a class="btn btn-secondary" href="{% url 'usersignin' %}"><button class="btn btn-secondary" type="button" >User Sign in</button></a>
+    <a class="btn btn-secondary" href="{% url 'stafflogin' %}"><button class="btn btn-secondary" type="button" >Staff Sign in</button></a>
+</div>
+
+
+</div>
+
+{% endblock %}
