@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .form import StaffForm,UserForm
+from .form import StaffForm,UserForm,ItemsForm
 
 # Create your views here.
 def home(request):
@@ -28,10 +28,22 @@ def usersignin(request):
 def stafflogin(request):
     return render(request,'stafflogin.html',{})
 def staffregistration(request):
-    return render(request,'staffregistration.html',{})
+    form = StaffForm()
+    return render(request,'staffregistration.html',{'form':form})
 def userregistration(request):
-    return render(request,'userregistration.html',{})
+    form = UserForm()
+    return render(request,'userregistration.html',{'form':form})
 def signin(request):
     return render(request, 'signin.html',{})
 def signup(request):
     return render(request,'signup.html',{})
+
+
+#newly added for api tutorials
+from rest_framework import generics
+from. models import MenuItems
+from .serializers import MenuItemSerializer
+
+class MenuItemsView(generics.ListCreateAPIView):
+    queryset = MenuItems.objects.all()
+    serializer_class = MenuItemSerializer

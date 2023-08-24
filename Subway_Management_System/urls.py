@@ -17,9 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from Restaurent import urls
+from BookListAPI import urls as burls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include(urls))
+    path('',include(urls)),
+    path('api/',include(burls)),
+    path('__debug__/',include('debug_toolbar.urls')),
+
 
 ]

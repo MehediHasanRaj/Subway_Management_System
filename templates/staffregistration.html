@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    <--this is for the staff registration-->
+        <form action="/userform" action="POST">
+        {% csrf_token %}
+        <table>
+            {{ form }}
+        </table>
+        <input type="submit">
 
 {% endblock %}
