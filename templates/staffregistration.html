@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-        <form action="/userform" action="POST">
+        <form action="{% url 'staffregistration' %}" method="POST">
         {% csrf_token %}
-        <table>
-            {{ form }}
-        </table>
-        <input type="submit">
+            <div>
+                     <table>
+                        {{ form.as_table }}
+                        </table>
+                        <input type="submit">
 
+            </div>
+        </form>
+    <h1 style="text-align:center">{{ thanks }}</h1>
 {% endblock %}

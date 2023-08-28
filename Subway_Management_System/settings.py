@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'BookListAPI',
     'debug_toolbar',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [

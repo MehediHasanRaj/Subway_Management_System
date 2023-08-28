@@ -1,5 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>this is menu page</h1>
+<h1>this is menu list</h1>
+    <div class ="container">
+        <table class="table table-dark table-striped">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Type</th>
+                <th>Action</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+                {% for d in data %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ d.name }}</td>
+                    <td>{{ d.price }}</td>
+                    <td>{{ d.type }}</td>
+                    <td> <a href="/delete-menu/{{ d.id }}" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="/update-menu/{{ d.id }}" class="btn btn-secondary btn-sm">Update</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
 {% endblock %}

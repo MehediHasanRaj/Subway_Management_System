@@ -31,6 +31,10 @@ urlpatterns = [
     path('userregistration/',userregistration,name = 'userregistration'),
     path('signin',signin,name = 'signin'),
     path('signup',signup, name = 'signup'),
+    path('delete-menu/<int:menu_id>',delete_menu),
+    path('update-menu/<int:menu_id>',update_menu),
+    path('add-item/',addItem,name = 'add-item')
+
 
 
 
