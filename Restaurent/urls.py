@@ -27,7 +27,7 @@ urlpatterns = [
     path('update-menu/<int:menu_id>',update_menu),
     path('add-item/',addItem,name = 'add-item'),
     path('registration/',Registration,name ='Registration'),
-    path('login/',login,name='login'),
+    path('login/', Login, name='login'),
 
 
 

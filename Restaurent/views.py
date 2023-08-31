@@ -3,7 +3,7 @@ from .form import ItemsForm  # ,UserForm
 from .models import MenuItems
 from django.contrib import messages
 from .form import CustomUserCreationForm,userloginform
-
+from django.contrib.auth.models import User
 # Create your views here.
 
 def home(request):
@@ -72,9 +72,19 @@ def Registration(request):
         form = CustomUserCreationForm()
     return render(request, 'Registration.html', {'form':form})
 
+from django.contrib.auth import authenticate,login,logout
 
-def login(request):
+def Login(request):
     if request.method=="POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username,password=password)
+        if user is None:
+            messages.error(request,"invalid username or password!!")
+            return redirect('login')
+        else:
+            login()
+
         print("i am post")
         print(request.POST)
         return redirect('home')

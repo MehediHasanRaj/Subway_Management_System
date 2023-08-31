@@ -49,7 +49,7 @@ class CustomUserCreationForm(UserCreationForm):
 class userloginform(Form):
     username = forms.CharField(label='Username', min_length=5, max_length=150,
                                widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
-    password1 = forms.CharField(label='Password',
+    password = forms.CharField(label='Password',
                                 widget=forms.PasswordInput(attrs={'class': 'form-control form-control-lg'}))
 
 
