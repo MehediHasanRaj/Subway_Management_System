@@ -1,12 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-        <form action="{% url 'add-item' %}" method="POST">
-        {% csrf_token %}
+
+<h1>Adding items</h1>
+
+
+
+
+
+
             <table>
                         {{ form.as_table }}
                         </table>
                         <input type="submit">
         </form>
     <h1 style="text-align:center">{{ text }}</h1>
+
+
+
+
 {% endblock %}

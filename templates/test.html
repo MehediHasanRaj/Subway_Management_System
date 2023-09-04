@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% csrf_token %}
+<h1>{{ request.user.username}}</h1>
+    {{ request.user.email }}
+    {{ request.user.is_staff }}
+    {{ request.user.as_table }}
+{% endblock %}
