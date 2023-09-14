@@ -11,7 +11,24 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request, 'home.html', {})
 
-
+def orderadd(request):
+    print('this is product id' + str(request.POST.get('product')))
+    print('this is reqeust', request.POST)
+    product = request.POST.get('product')
+    cart = request.session.get('cart')
+    if cart:
+        quantity = cart.get(product)
+        print('this is the quantity ', quantity)
+        if quantity:
+            cart[product] = quantity + 1
+        else:
+            cart[product] = 1
+    else:
+        cart = {}
+        cart[product] = 1
+    request.session['cart'] = cart
+    print(request.session['cart'])
+    return redirect('/menu/')
 def about(request):
     return render(request, 'about.html', {})
 
@@ -36,8 +53,10 @@ def item_view(request):
 
 def item_add(request):
     sms = ""
+    print(request.POST)
+    print(request.FILES)
     if request.method == "POST":
-        form = ItemsForm(request.POST)
+        form = ItemsForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
             sms="Item added successfully!!"

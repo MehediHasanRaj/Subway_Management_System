@@ -7,4 +7,4 @@ from .models import *
 @admin.register(MenuItems)
 
 class Admin(admin.ModelAdmin):
-    list_display = ['id','name','price','type']
+    list_display = ['id','name','price','type','picture']
