@@ -1,5 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>this is order page</h1>
+{% load cart %}
+    <div class ="container">
+        <h1>Order List:</h1>
+        <table class="table table-dark table-striped">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+
+            </tr>
+            </thead>
+            <tbody>
+                {% for d in order %}
+
+
+                <tr>
+                    <td>{{ forloop.counter}}</td>
+                    <td><img style="height: 50px"  src="{{ d.picture.url }}"></td>
+                    <td>{{ d.name }}</td>
+                    <td>£{{ d.price }}</td>
+                    <td>{{ d | is_in_cart:request.session.cart }}</td>
+                    <td>£{{ d | price_total:request.session.cart }}</td>
+                </tr>
+
+
+                {% endfor %}
+
+            </tbody>
+        <tfoot>
+        <th colspan="4"></th>
+         <th  >Total</th>
+        <th>£{{ order| total:request.session.cart}}</th>
+        </tfoot>
+        </table>
+    <div >
+        <a href="#" class="btn btn-outline-info border rounded col-lg-3 float-end">Check out</a>
+    </div>
+
+
+
+    </div>
 {% endblock %}

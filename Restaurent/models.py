@@ -1,6 +1,7 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import AbstractUser
+
 # Create your models here.
 
 # class Users(models.Model):
@@ -27,3 +28,6 @@ class MenuItems(models.Model):
     info = models.CharField(max_length=50)
     def __str__(self):
         return self.name
+
+
+

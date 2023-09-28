@@ -38,7 +38,11 @@ def menu(request):
     return render(request, 'menu.html', {"data": data})
 
 def order(request):
-    return render(request, 'order.html', {})
+    ids = list(request.session.get('cart').keys())
+    products = MenuItems.objects.filter(id__in=ids)
+    print(products)
+
+    return render(request, 'order.html', {'order':products})
 
 
 

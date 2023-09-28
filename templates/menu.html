@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
+{% load cart %}
 
     <div class="row">
         <div class="col-sm-3">
@@ -17,6 +17,8 @@
                                 <p class="card-text">{{ d.info }}</p>
                                   <form action="{% url 'orderadd' %}" method="POST">
                                       {% csrf_token %}
+
+                                      <!--<input type="submit" class="btn btn-secondary" value={{ d | is_in_cart:request.session.cart }}>--!>
                                       <input hidden type="text" name = "product" value="{{ d.id }}">
                                       <input type="submit" class="btn btn-primary" value="Add to Order">
                                   </form>
