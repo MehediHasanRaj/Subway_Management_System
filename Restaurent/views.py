@@ -2,15 +2,24 @@ from django.shortcuts import render, redirect
 from .form import ItemsForm  # ,UserForm
 from .models import MenuItems
 from django.contrib import messages
-from .form import CustomUserCreationForm,userloginform
+from .form import CustomUserCreationForm, userloginform
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-# Create your views here.
-@login_required(login_url="/login/")
-def home(request):
-    return render(request, 'home.html', {})
 
+
+# Create your views here.
+
+def home(request):
+    anonymous = True
+
+    if request.user.is_authenticated:
+        anonymous = False
+
+    return render(request, 'home.html', {'anonymous': anonymous})
+
+
+@login_required(login_url="/login/")
 def orderadd(request):
     print('this is product id' + str(request.POST.get('product')))
     print('this is reqeust', request.POST)
@@ -29,46 +38,59 @@ def orderadd(request):
     request.session['cart'] = cart
     print(request.session['cart'])
     return redirect('/menu/')
+
+
 def about(request):
     return render(request, 'about.html', {})
+
 
 def menu(request):
     data = MenuItems.objects.all()
     print(data)
     return render(request, 'menu.html', {"data": data})
 
+
 def order(request):
+    cart = request.session.get('cart')
+
+    if not cart:
+        cart = {}
+    request.session['cart'] = cart
+
     ids = list(request.session.get('cart').keys())
     products = MenuItems.objects.filter(id__in=ids)
     print(products)
 
-    return render(request, 'order.html', {'order':products})
-
+    return render(request, 'order.html', {'order': products})
 
 
 def items(request):
     data = MenuItems.objects.all()
     form = ItemsForm()
-    return render(request, 'items.html', {'form': form,'d':data})
+    return render(request, 'items.html', {'form': form, 'd': data})
+
 
 def item_view(request):
     data = MenuItems.objects.all()
-    return render(request,'item-view.html',{'data':data})
+    return render(request, 'item-view.html', {'data': data})
+
 
 def item_add(request):
     sms = ""
     print(request.POST)
     print(request.FILES)
     if request.method == "POST":
-        form = ItemsForm(request.POST,request.FILES)
+        form = ItemsForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            sms="Item added successfully!!"
+            sms = "Item added successfully!!"
         else:
             sms = "Something went wrong!!!"
     else:
         form = ItemsForm()
-    return render(request,'item-add.html',{'form':form,'sms':sms})
+    return render(request, 'item-add.html', {'form': form, 'sms': sms})
+
+
 def addItem(request):
     text = ""
     if request.method == "POST":
@@ -80,17 +102,23 @@ def addItem(request):
         form = ItemsForm()
     return render(request, "item-add.html", {'form': form, 'text': text})
 
+
 def profile(request):
-    return render(request,'test.html',{'User':User})
+    return render(request, 'test.html', {'User': User})
+
 
 def delete_menu(request, menu_id):
+    if request.user.username is not 'admin':
+        print('you have no access to delete')
+        return redirect("/item-delete/")
     menuItem = MenuItems.objects.get(pk=menu_id)
     menuItem.delete()
     return redirect("/item-delete/")
 
+
 def item_delete(request):
     data = MenuItems.objects.all()
-    return render(request,'item-delete.html',{'data':data})
+    return render(request, 'item-delete.html', {'data': data})
 
 
 def update_menu(request, menu_id):
@@ -99,12 +127,15 @@ def update_menu(request, menu_id):
     menuitem.delete()
     return render(request, "item-add.html", {'form': form})
 
+
 def item_update(request):
     data = MenuItems.objects.all()
-    return render(request,'item-update.html',{'data':data})
+    return render(request, 'item-update.html', {'data': data})
+
+
 def Registration(request):
     method = request.method
-    print('type of method is ',end='')
+    print('type of method is ', end='')
     print(type(method))
 
     if method == "POST":
@@ -115,48 +146,41 @@ def Registration(request):
             form.save()
             print("user creation successfulyyy")
             messages.success(request, "Account created successfully")
-            # return redirect('')
+            return redirect('/login/')
         else:
             print("not created user")
     else:
         print("I am in else method")
         form = CustomUserCreationForm()
-    return render(request, 'Registration.html', {'form':form})
-
+    return render(request, 'Registration.html', {'form': form})
 
 
 def Login(request):
     # print("this --method is ---")
     # print(request.method)
     # print('end method')
-    if request.method=="POST":
+    if request.method == "POST":
         # print('i am it post')
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         if not User.objects.filter(username=username).exists():
-            messages.error(request,'username does not exist')
+            messages.error(request, 'username does not exist')
             # print('username doesnot')
             return redirect('Login')
 
-        user = authenticate(username=username,password=password)
+        user = authenticate(username=username, password=password)
         if user is None:
-            messages.error(request,'invalid username or password!!')
+            messages.error(request, 'invalid username or password!!')
             return redirect('Login')
         else:
-            login(request,user)
+            login(request, user)
             return redirect('home')
 
     form = userloginform()
-    return render(request,'login.html',{'form':form})
+    return render(request, 'login.html', {'form': form})
+
 
 def Logout(request):
     logout(request)
     return redirect('Login')
-
-
-
-
-
-
-

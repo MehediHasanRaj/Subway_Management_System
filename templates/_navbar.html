@@ -39,8 +39,14 @@
 
 
     <div>
-        <a href="{% url 'Logout' %}" class="btn btn-success" type="submit">Logout</a>
 
+        {% if anonymous %}
+            <button class="btn btn-secondary">Hello, Guest</button>
+        <a href="{% url 'Login' %}" class="btn btn-primary" type="submit">Login</a>
+        {% else %}
+            <button class="btn btn-secondary">Hello, {{ request.user.username }}</button>
+        <a href="{% url 'Logout' %}" class="btn btn-primary" type="submit">Logout</a>
+        {% endif %}
     </div>
 
 </nav>
