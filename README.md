@@ -35,7 +35,7 @@ The Subway Management System is a robust restaurant management software built us
 ### Steps:
 1. Clone the repository:
    ```bash
-   git clone <r[epository-url](https://github.com/MehediHasanRaj/Subway_Management_System)>
+   git clone https://github.com/MehediHasanRaj/Subway_Management_System
    cd subway-management-system
    ```
 
