@@ -22,7 +22,7 @@ The Subway Management System is a robust restaurant management software built us
 ## Tech Stack
 - **Backend**: Django, Django REST Framework (DRF), Python
 - **Frontend**: HTML, CSS, Bootstrap
-- **Database**: SQLite (can be replaced with other databases)
+- **Database**: MYSQL
 - **Version Control**: Git
 
 ## Installation
@@ -35,7 +35,7 @@ The Subway Management System is a robust restaurant management software built us
 ### Steps:
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone <r[epository-url](https://github.com/MehediHasanRaj/Subway_Management_System)>
    cd subway-management-system
    ```
 
@@ -109,13 +109,6 @@ Run the tests using the following command:
 python manage.py test
 ```
 
-## Screenshots
-
-### Customer Portal:
-![Customer Portal Screenshot](assets/customer-portal.png)
-
-### Admin Portal:
-![Admin Portal Screenshot](assets/admin-portal.png)
 
 ## Future Enhancements
 - Payment gateway integration.
